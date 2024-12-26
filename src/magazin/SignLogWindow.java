@@ -134,8 +134,9 @@ public class SignLogWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
         String username = this.username.getText().trim();
         String password = this.password.getText();
-        
+
         if (!username.equals("") && !password.equals("")) {
+            System.out.println("ghhhhk");
             try {
                 FileWriter fw = new FileWriter("src/magazin/users.txt", true);
                 fw.append(username + " : " + password + "\n");
@@ -144,26 +145,26 @@ public class SignLogWindow extends javax.swing.JFrame {
                 Logger.getLogger(SignLogWindow.class.getName()).log(Level.SEVERE, null, ex);
             }
             dispose();
-        }
-        else {
+            new Produkti().setVisible(true);
+        } else {
             JOptionPane.showMessageDialog(null, "Empty fields!");
         }
     }//GEN-LAST:event_submitButtonActionPerformed
 
-    
     public void hideSubmit() {
         this.submitButton.setVisible(false);
     }
+
     public void hideLogIn() {
         this.logInButton.setVisible(false);
     }
-    
+
     private void logInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logInButtonActionPerformed
         // TODO add your handling code here:
         String username = this.username.getText().trim();
         String password = this.password.getText();
         String txt = "";
-        
+
         try {
             FileReader fr = new FileReader("src/magazin/users.txt");
             while (fr.ready()) {
@@ -173,15 +174,16 @@ public class SignLogWindow extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(SignLogWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
-    if (txt.contains(username + " : " + password) && (!username.equals("") && !password.equals(""))) {
-        dispose();
-        Pokupka p = new Pokupka();
-        p.setLocationRelativeTo(null);
-        p.setVisible(true);
-    }
-    else {
-        JOptionPane.showMessageDialog(null, "Wrong credentials!");
-    }
+        if (txt.contains(username + " : " + password) && (!username.equals("") && !password.equals(""))) {
+            dispose();
+            
+                new Produkti().setVisible(true);
+//            Pokupka p = new Pokupka();
+//            p.setLocationRelativeTo(null);
+//            p.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Wrong credentials!");
+        }
     }//GEN-LAST:event_logInButtonActionPerformed
 
     /**
